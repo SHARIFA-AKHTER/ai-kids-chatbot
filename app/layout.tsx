@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://your-domain.vercel.app"), // পরে নিজের domain বসাবে
+  metadataBase: new URL("https://your-domain.vercel.app"), 
 
   title: {
     default: "AI Kids Chatbot",
