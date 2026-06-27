@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧸 KidsBot: AI-Powered English Learning Chatbot for Children
 
-## Getting Started
+KidsBot is an advanced, AI-powered full-stack English learning chatbot designed specifically for children under 7 years old. Built using **Next.js 15 (Turbopack)**, **Google Gemini 2.5 Flash**, and **Prisma ORM with Neon PostgreSQL**, this application provides an adaptive, emotionally aware, and high-performance learning environment.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Live Links & Assignment Deliverables
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Live Deployed URL:** [https://ai-kids-chatbot-client-o33d3lyss-sharifa991s-projects.vercel.app]
+* **GitHub Repository:** [https://github.com/SHARIFA-AKHTER/ai-kids-chatbot.git]
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Core Features
 
-## Learn More
+### 1. Progressive Learning System
+The chatbot automatically tracks, adapts, and updates the linguistic difficulty based on the child's progressive capability:
+* **Level 1 (L1 - Words & Phonics):** Focuses on isolated words, letter sounds, and repetitive phonics (e.g., *"A for Apple! 🍎"*).
+* **Level 2 (L2 - Phrases):** Uses 2-3 word pairings, highly descriptive yet short (e.g., *"Happy small bird! 🐦"*).
+* **Level 3 (L3 - Simple Sentences):** Introduces basic full sentences without complex subordinate clauses (e.g., *"The butterfly sits on a big flower. 🦋"*).
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Intelligent Child Mode & Mood Detection
+KidsBot dynamically switches communication profiles based on the child's real-time interaction token analysis:
+* `Learning`: Active structural language mechanics instruction.
+* `Conversation`: Casual, supportive, and friendly exchange.
+* `Engagement`: Gamified rhymes, interactive riddles, and play-based prompts.
+* `Support`: Activated immediately if the child implies operational confusion or performance hesitation.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Social and Emotional Learning (SEL)
+* **Persona:** Unconditionally supportive, cheerful, and enthusiastic.
+* **Positive Reinforcement:** Immediate celebration of every learning attempt with highly expressive phrasing (*"Super!", "Magnificent! ⭐"*) and rich animated emojis to maximize psychological visual engagement.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Real-time Parent Dashboard
+* Server-side dynamic rendering (`force-dynamic`) pulls fresh metrics from the Neon PostgreSQL server to visualize the child's active Level, current Chatbot Mode, and evaluated Emotional State.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧠 Design Decisions & Technology Choices
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **Next.js 15 (App Router Monolith):** Chosen to bundle both native client views and backend API Routes into a single deployment unit, avoiding dual-repo synchronization friction while maintaining full Edge Compatibility.
+* **Google Gemini 2.5 Flash (`responseMimeType: "application/json"`):** Utilized for ultra-low latency response processing (under 2 seconds) while enforcing explicit structural output constraints matching native TypeScript types.
+* **Neon Serverless Postgres + Prisma ORM:** Leveraged connection-pooling HTTP drivers inside next-generation serverless API endpoints to bypass database zombie connection limits during rapid hot-reloads.
+* **Server Component Injection:** Abandoned vulnerable global client state variables in favor of contextual server runtime request hooks, ensuring real-time `upsert` synchronization with the database.
+
+---
+
+## 📋 System Architecture
+
+[ Client View / Chat UX ] <---> [ Next.js Serverless API Routs (/api/chat) ]
+                                      |                       |
+                                      v                       v
+                           [ Google Gemini 2.5 ]    [ Neon Serverless DB ]
+                           (JSON Output Mode)       (Prisma Client Driver)
