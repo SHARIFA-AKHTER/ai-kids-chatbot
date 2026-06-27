@@ -1,23 +1,33 @@
-import type { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 
+
+// Next.js 15 Metadata Configuration
 export const metadata: Metadata = {
-  title: "Home",
-  description:
-    "Welcome to AI Kids Chatbot. Safe, fun and educational AI assistant for children.",
+  title: "KidsBot | AI-Powered English Learning Chatbot for Kids",
+  description: "An interactive, adaptive, and emotionally aware AI English tutor designed for children under 7 years old.",
+  keywords: ["English learning chatbot", "AI for kids", "child language learning", "progressive learning system"],
+  authors: [{ name: "Sharifa", url: "https://github.com/SHARIFA-AKHTER" }],
+  openGraph: {
+    title: "KidsBot - AI English Tutor for Kids",
+    description: "Step-by-step progressive English learning system with Social and Emotional Learning (SEL) features.",
+    type: "website",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function Home() {
   return (
-    <main>
-      <div className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1 className="text-4xl font-bold text-center">
-          Welcome to AI Kids Chatbot!
-        </h1>
-        <p className="mt-4 text-lg text-center">
-          A child-friendly AI chatbot that helps kids learn, explore, and enjoy safe conversations powered by Google Gemini.
-        </p>
+    <main className="min-h-screen w-full bg-linear-to-b from-amber-50 to-orange-100 p-3 sm:p-4 md:p-8 flex flex-col items-center justify-between">
+      <div className="w-full max-w-5xl flex flex-col items-center flex-1 h-full">
+        {/* Responsive Header Container */}
+        {/* <ChatInterface /> */}
       </div>
     </main>
   );
 }
-  
