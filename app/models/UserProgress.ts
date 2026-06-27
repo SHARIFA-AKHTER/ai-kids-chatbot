@@ -40,7 +40,7 @@ import { neon } from "@neondatabase/serverless";
 import { BotMode, Level, Message } from "../types";
 
 const getFreshDb = () => {
-  const dbUrl = process.env.DATABASE_URL || "postgresql://neondb_owner:npg_uH2RlWrAt4vj@ep-tiny-salad-at1pqij7-pooler.c-9.us-east-1.aws.neon.tech/neondb";
+  const dbUrl = process.env.DATABASE_URL || "postgresql://neondb_owner:npg_uH2RlWrAt4vj@ep-tiny-salad-at1pqij7-pooler.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require";
   const sql = neon(dbUrl);
   const adapter = new PrismaNeon(sql as unknown as ConstructorParameters<typeof PrismaNeon>[0]);
   return new PrismaClient({ adapter });
