@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model UserProgress {
+  id           String   @id @default(uuid())
+  childName    String   @default("Little Friend")
+  currentLevel String   @default("L1")
+  currentMode  String   @default("Conversation")
+  historyJson  String   @default("[]")
+  updatedAt    DateTime @updatedAt
+}
