@@ -1,4 +1,5 @@
 import { Metadata, Viewport } from "next";
+import ChatContainer from "./components/ChatContainer";
 
 
 // Next.js 15 Metadata Configuration
@@ -25,8 +26,8 @@ export default function Home() {
   return (
     <main className="min-h-screen w-full bg-linear-to-b from-amber-50 to-orange-100 p-3 sm:p-4 md:p-8 flex flex-col items-center justify-between">
       <div className="w-full max-w-5xl flex flex-col items-center flex-1 h-full">
-        {/* Responsive Header Container */}
-        {/* <ChatInterface /> */}
+
+        <ChatContainer />
       </div>
     </main>
   );
