@@ -46,13 +46,15 @@
 //   },
 // };
 
-
 import { PrismaClient } from "@prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import { neon } from "@neondatabase/serverless";
 import { BotMode, Level, Message } from "../types";
 
-const connectionString = "postgresql://neondb_owner:npg_uH2RlWrAt4vj@ep-tiny-salad-at1pqij7-pooler.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require";
+const connectionString =
+  "postgresql://neondb_owner:npg_uH2RlWrAt4vj@ep-tiny-salad-at1pqij7-pooler.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require";
+
+process.env.DATABASE_URL = connectionString;
 
 const sql = neon(connectionString);
 const adapter = new PrismaNeon(sql as any);
@@ -83,6 +85,7 @@ export const UserProgressModel = {
           currentLevel: "L1",
           currentMode: "Conversation",
           historyJson: JSON.stringify([]),
+        
         },
       });
     } catch (error) {
@@ -101,7 +104,7 @@ export const UserProgressModel = {
     userId: string,
     newLevel: Level,
     newMode: BotMode,
-    updatedHistory: Message[]
+    updatedHistory: Message[],
   ) {
     try {
       return await db.userProgress.upsert({
@@ -117,6 +120,7 @@ export const UserProgressModel = {
           currentLevel: newLevel,
           currentMode: newMode,
           historyJson: JSON.stringify(updatedHistory),
+         
         },
       });
     } catch (error) {
