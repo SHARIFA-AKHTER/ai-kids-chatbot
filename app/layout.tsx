@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://your-domain.vercel.app"), 
+  metadataBase: new URL("https://ai-kids-chatbot-client.vercel.app"), 
 
   title: {
     default: "AI Kids Chatbot",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     title: "AI Kids Chatbot",
     description:
       "A child-friendly AI chatbot that helps kids learn, explore, and enjoy safe conversations powered by Google Gemini.",
-    url: "https://your-domain.vercel.app",
+    url: "https://ai-kids-chatbot-client.vercel.app",
     siteName: "AI Kids Chatbot",
     locale: "en_US",
     type: "website",
