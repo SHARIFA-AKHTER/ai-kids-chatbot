@@ -73,14 +73,9 @@ export const metadata: Metadata = {
   },
 
 icons: {
-    icon: [
-      {
-        url: "/KidsBot.jpg",
-        type: "image/jpeg",
-      },
-    ],
-    shortcut: "/KidsBot.jpg",
-    apple: "/KidsBot.jpg",
+      icon: "/icon.jpg",
+    shortcut: "/icon.jpg",
+    apple: "/icon.jpg",
   },
 };
 
