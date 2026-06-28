@@ -11,6 +11,7 @@ export default async function Dashboard() {
 
 const timeout = new Promise((_, reject) =>
     setTimeout(() => reject("Database timeout"), 3000)
+
   );
 
   try {

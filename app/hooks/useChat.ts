@@ -27,6 +27,7 @@ export function useChat() {
           message: text,
           currentLevel: level,
           history: messages,
+          
         }),
       });
 
