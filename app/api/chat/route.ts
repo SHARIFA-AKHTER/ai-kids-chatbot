@@ -86,6 +86,7 @@ Return ONLY valid JSON:
       const result = await chat.sendMessage(message);
       text = result.response.text();
     } catch (geminiError) {
+       console.error("Gemini Error:", geminiError);
       let reply = "Oh, big hugs! ❤️ KidsBot loves you! Let's say 'Happy' together!";
       let mode: BotMode = "Support";
 
@@ -127,11 +128,11 @@ Return ONLY valid JSON:
     return NextResponse.json(parsed);
 
   } catch (globalError) {
-    console.error("Global API Error Catch:", globalError);
+    console.error("Global API Error:", globalError);
     return NextResponse.json({
-      reply: "Oh, look at the stars! 🌟 Let's try saying 'Star'!",
+      reply: "Oh! Let's try again! 🌈",
       mode: "Support",
-      suggestedLevel: userSelectedLevel,
-    });
+      suggestedLevel: "L1"
+    }, { status: 200 });
   }
 }
