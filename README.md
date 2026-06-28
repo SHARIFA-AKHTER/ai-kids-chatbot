@@ -6,7 +6,7 @@ KidsBot is an advanced, AI-powered full-stack English learning chatbot designed 
 
 ## 🚀 Live Links & Assignment Deliverables
 
-* **Live Deployed URL:** [https://ai-kids-chatbot-client-o33d3lyss-sharifa991s-projects.vercel.app]
+* **Live Deployed URL:** [https://ai-kids-chatbot-client.vercel.app]
 * **GitHub Repository:** [https://github.com/SHARIFA-AKHTER/ai-kids-chatbot.git]
 
 ---
