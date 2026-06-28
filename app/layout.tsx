@@ -72,10 +72,15 @@ export const metadata: Metadata = {
       "Safe AI-powered learning assistant for children built with Next.js and Google Gemini.",
   },
 
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+icons: {
+    icon: [
+      {
+        url: "/KidsBot.jpg",
+        type: "image/jpeg",
+      },
+    ],
+    shortcut: "/KidsBot.jpg",
+    apple: "/KidsBot.jpg",
   },
 };
 
