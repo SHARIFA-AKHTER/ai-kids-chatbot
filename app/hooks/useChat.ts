@@ -53,4 +53,4 @@ export function useChat() {
   };
 
   return { messages, level, setLevel, mode, loading, sendMessage };
-}
+} 

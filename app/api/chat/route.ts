@@ -3,7 +3,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
+import {
+  GoogleGenerativeAI,
+  HarmBlockThreshold,
+  HarmCategory,
+} from "@google/generative-ai";
 import { Level, Message, BotMode } from "@/app/types";
 import { UserProgressModel } from "@/app/models/UserProgress";
 
@@ -19,7 +23,7 @@ export async function POST(req: NextRequest) {
     if (!process.env.GEMINI_API_KEY) {
       return NextResponse.json(
         { error: "Missing GEMINI_API_KEY" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -30,27 +34,23 @@ export async function POST(req: NextRequest) {
     currentHistory = history;
 
     const systemInstruction = `
-You are an AI-powered English Learning Chatbot named KidsBot, designed for children under 7 years old.
+You are an AI-powered English Learning Chatbot named KidsBot for children under 7.
 Current Child Learning Level: ${currentLevel}.
 
-Strictly adhere to these linguistic level rules:
-- L1 (Words & Phonics): Focus on isolated words, basic letter sounds, or repetitive phonics.
+STRICT LINGUISTIC RULES:
+- L1 (Words & Phonics): Focus on isolated words, basic letter sounds.
 - L2 (Phrases): Use basic 2–3 word phrases.
-- L3 (Simple Sentences): Use short complete sentences.
-
+- L3 (Simple Sentences): YOU MUST ONLY USE COMPLETE, SHORT SENTENCES. 
+  NEVER teach isolated letters (like A, B, C) or single words in L3. 
+  Always use full sentences. For example, instead of 'E is next', say 'Can we learn about the letter E together in a sentence? I like the letter E!'
 [EMOTIONAL SEL & MODE SWITCHING RULES]:
-1. If the child expresses sadness, anger, negative emotions, or says things like "I hate my parents" or "don't want to talk":
-   - IMMEDIATELY set "mode" to "Support".
-   - For "reply", provide comforting words or condolences FIRST (e.g., "Oh, big hugs! ❤️ KidsBot loves you! It is okay to feel sad."). 
-   - THEN, gently transition back to a comforting learning prompt in the SAME reply (e.g., "Let's breathe together. Can you say 'Calm'?").
-   - Set "suggestedLevel" to the current level (${currentLevel}).
-
-2. If the child is happy or responsive, set "mode" to "Learning" or "Engagement" and focus on regular English learning.
-
+- If child is negative (sad/angry): Set mode to "Support", provide comfort FIRST.
+- IMPORTANT: If the child expresses readiness to learn (e.g., "I am ready"), IMMEDIATELY switch mode back to "Learning" or "Engagement".
+- If mode is "Support" but the child is responding positively or asking to learn: Switch mode to "Learning".
 Return ONLY valid JSON:
 {
-  "reply": "",
-  "mode": "Support",
+  "reply": "Your response here (Follow the L3 sentence rule if level is L3)",
+  "mode": "Support" | "Learning" | "Engagement",
   "suggestedLevel": "${currentLevel}"
 }
 `;
@@ -61,15 +61,15 @@ Return ONLY valid JSON:
       generationConfig: {
         responseMimeType: "application/json",
       },
-     
+
       safetySettings: [
-        { 
-          category: HarmCategory.HARM_CATEGORY_HARASSMENT, 
-          threshold: HarmBlockThreshold.BLOCK_NONE 
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_NONE,
         },
-        { 
-          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, 
-          threshold: HarmBlockThreshold.BLOCK_NONE 
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_NONE,
         },
       ],
     });
@@ -86,8 +86,9 @@ Return ONLY valid JSON:
       const result = await chat.sendMessage(message);
       text = result.response.text();
     } catch (geminiError) {
-       console.error("Gemini Error:", geminiError);
-      let reply = "Oh, big hugs! ❤️ KidsBot loves you! Let's say 'Happy' together!";
+      console.error("Gemini Error:", geminiError);
+      let reply =
+        "Oh, big hugs! ❤️ KidsBot loves you! Let's say 'Happy' together!";
       let mode: BotMode = "Support";
 
       text = JSON.stringify({
@@ -119,20 +120,22 @@ Return ONLY valid JSON:
         "default-child",
         parsed.suggestedLevel,
         parsed.mode,
-        updatedHistory
+        updatedHistory,
       );
     } catch (dbError) {
       console.error("Database sync ignored in api route:", dbError);
     }
 
     return NextResponse.json(parsed);
-
   } catch (globalError) {
     console.error("Global API Error:", globalError);
-    return NextResponse.json({
-      reply: "Oh! Let's try again! 🌈",
-      mode: "Support",
-      suggestedLevel: "L1"
-    }, { status: 200 });
+    return NextResponse.json(
+      {
+        reply: "Oh! Let's try again! 🌈",
+        mode: "Support",
+        suggestedLevel: "L1",
+      },
+      { status: 200 },
+    );
   }
 }
