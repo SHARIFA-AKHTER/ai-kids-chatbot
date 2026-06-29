@@ -125,7 +125,8 @@ Return ONLY valid JSON:
     try {
       await UserProgressModel.updateProgress(
         "default-child",
-        parsed.suggestedLevel,
+        // parsed.suggestedLevel,
+        userSelectedLevel,
         parsed.mode,
         updatedHistory,
       );
@@ -140,7 +141,8 @@ Return ONLY valid JSON:
       {
         reply: "Oh! Let's try again! 🌈",
         mode: "Support",
-        suggestedLevel: "L1",
+        // suggestedLevel: "L1",
+        suggestedLevel: userSelectedLevel,
       },
       { status: 200 },
     );
