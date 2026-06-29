@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
     const systemInstruction = `
 You are an AI-powered English Learning Chatbot named KidsBot for children under 7.
 Current Child Learning Level: ${currentLevel}.
+- DO NOT CHANGE THE LEVEL AUTOMATICALLY. You must strictly stay on the level provided in ${currentLevel}. Only the user can change the level from the UI.
 
 STRICT LINGUISTIC RULES:
 - L1 (Words & Phonics): Focus on isolated words, basic letter sounds.
